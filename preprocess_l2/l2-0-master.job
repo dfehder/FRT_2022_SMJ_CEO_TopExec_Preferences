@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Begin by taking the subsets. This is an array job so manage dependencis accordingly
+jid1=$(sbatch l2-1-subset-data.job | cut -d ' ' -f4)
+
+# convert the pickles to csv files in chunks of states. 
+# This is an array job so manage dependencis accordingly
+jid2=$(sbatch --dependency=afterany:${jid1} l2-2-combine.job | cut -d ' ' -f4)
+
+# Then convert to dta files
+# This is an array job so manage dependencis accordingly
+jid3=$(sbatch --dependency=afterany:${jid2} l2-3-stata-step1.job | cut -d ' ' -f4)
+
+# Do Stata Step 2 where you combine the files
+# This is an array job so manage dependencis accordingly
+#jid4=$(sbatch --dependency=afterany:${jid3} l2-4-stata-step2.job | cut -d ' ' -f4)

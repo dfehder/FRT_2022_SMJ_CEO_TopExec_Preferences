@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --time=1:30:00
+#SBATCH --mem=20GB
+#SBATCH --account=fehder_718
+#SBATCH --array=1-6 # job array index
+
+module load gcc/8.3.0
+module load stata
+
+export TMPDIR=/project/fehder_718/frt_2021b_data/inter/l2_processing/
+
+#stata-mp -b do l2-3-stata-step1.do preferences_raw $SLURM_ARRAY_TASK_ID
+#stata-mp -b do l2-3-stata-step1.do demographics_raw $SLURM_ARRAY_TASK_ID
+#stata-mp -b do l2-3-stata-step1.do match_bias $SLURM_ARRAY_TASK_ID
+stata-mp -b do l2-3-stata-step1.do l2_match $SLURM_ARRAY_TASK_ID

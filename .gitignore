@@ -1,0 +1,14 @@
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# ignore the data Folder
+data/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints

@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --time=2:30:00
+#SBATCH --mem=16GB
+#SBATCH --account=fehder_718
+
+module load gcc/8.3.0
+module load python
+
+export PYTHONPATH=/project/fehder_718/python/pkgs:${PYTHONPATH}
+
+python3 agg_match.py

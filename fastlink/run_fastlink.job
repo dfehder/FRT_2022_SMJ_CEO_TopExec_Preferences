@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --time=8:30:00
+#SBATCH --mem=40GB
+#SBATCH --account=fehder_718
+#SBATCH --array=1-192 # job array index
+
+module load gcc/8.3.0
+module load r
+
+Rscript --vanilla run_fastlink.R $SLURM_ARRAY_TASK_ID regions.json
